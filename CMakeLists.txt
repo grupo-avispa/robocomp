@@ -1,5 +1,5 @@
 # RoboComp global CMake
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.8)
 project(robocomp
         VERSION 2021.2.1
         DESCRIPTION "Robocomp framework"
