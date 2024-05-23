@@ -13,8 +13,6 @@
 
 [RoboComp's  build tools ](buildTools.md)
 
-[Starting with DSR](DSR-start.md)
-
 [List of RoboComp Interfaces](interfaces/README.md)
 
 [Introduction to InnerModel: RoboComp's internal representation of the world and itself](innermodel.md)

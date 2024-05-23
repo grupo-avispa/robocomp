@@ -9,7 +9,7 @@ In this tutorial, we walk you through the setup procedure of __CoppeliaSim__ and
 
 ## CoppeliaSim Installation
 
--   First, download __CoppeliaSim__ EDU version (compatible with your system) from [download page](https://www.coppeliarobotics.com/downloads.html).
+-   First, download __CoppeliaSim__ EDU version (compatible with your system) from download page.
 
 -   Extract it into your prefered directory.
 

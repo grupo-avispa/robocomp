@@ -39,7 +39,7 @@ If you are familiar with the terminal or would like to learn to use it, here is 
 [Doc-Tutorial](https://github.com/robocomp/robocomp/blob/development/doc/contribute/contribute.md) or  [Video-Tutorial](https://www.youtube.com/watch?v=rgbCcBNZcdQ&t=8s)
 
 ### Questions?
-Don’t hesitate to ask questions or to get help if you feel like you are getting stuck. For example leave a comment below or ask in the [gitter channel](https://gitter.im/robocomp).
+Don’t hesitate to ask questions or to get help if you feel like you are getting stuck.
 
 
 

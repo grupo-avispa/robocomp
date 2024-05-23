@@ -32,9 +32,6 @@ In the components folder of this repository you can find some of the esential ag
 
 Also in robots_pyrep you will find some of the virtualizations of robots created to be used with Coppelia SIM.
 
-At this point, if you are still not involved in the DSR development, you would probably want to follow this tutorial:
-https://github.com/robocomp/robocomp/blob/development/doc/DSR-start.md
-
 > Written with [StackEdit](https://stackedit.io/).
 <!--stackedit_data:
 eyJoaXN0b3J5IjpbLTIxODE2MzExMCwtMTQxNDQ1NTUxOF19

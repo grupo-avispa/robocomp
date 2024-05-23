@@ -1,10 +1,7 @@
 [RoboComp](http://robocomp.org)
 ===============================
 
-[![Join the chat at https://gitter.im/robocomp/robocomp](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/robocomp/robocomp?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
-[![Docs Links Checker](https://github.com/robocomp/robocomp/actions/workflows/broken_links.yml/badge.svg)](https://github.com/robocomp/robocomp/actions/workflows/broken_links.yml)
-[![CodeQL Analysis](https://github.com/robocomp/robocomp/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/robocomp/robocomp/actions/workflows/codeql-analysis.yml)
+[![Docs Links Checker](https://github.com/grupo-avispa/robocomp/actions/workflows/broken_links.yml/badge.svg)](https://github.com/grupo-avispa/robocomp/actions/workflows/broken_links.yml)
 [![Docker Images](https://github.com/robocomp/robocomp/actions/workflows/publish_docker_images.yml/badge.svg)](https://github.com/robocomp/robocomp/actions/workflows/publish_docker_images.yml)
 [![Component generation test](https://github.com/robocomp/robocomp/actions/workflows/components_generation.yml/badge.svg)](https://github.com/robocomp/robocomp/actions/workflows/components_generation.yml)
 [![Component compilation test](https://github.com/robocomp/robocomp/actions/workflows/components_compilation.yml/badge.svg)](https://github.com/robocomp/robocomp/actions/workflows/components_compilation.yml)
@@ -23,14 +20,18 @@ interfaces in a seamless way. Building new components is done using two domain-s
 :question: If you have a question please look for it in the [FAQ](doc/FAQ.md). 
 -
 
+- [RoboComp](#robocomp)
+- [About](#about)
+  - [:question: If you have a question please look for it in the FAQ.](#question-if-you-have-a-question-please-look-for-it-in-the-faq)
 - [Installation from source](#installation-from-source)
-  * [Requirements](#requirements)
-  * [Installation](#installation)
-- [Testing the installation using the RCIS robotics simulator](#testing-the-installation-using-the-rcis-robotics-simulator)
-  * [Installing some RoboLab's components from GitHub](#installing-some-robolab-s-components-from-github)
-  * [Connecting a JoyStick (if no JoyStick available skip to the next section)](#connecting-a-joystick)
-  * [Using the keyboard as a JoyStick](#using-the-keyboard-as-a-joystick)
-- [Testing the installation using the Coppelia Simulator](#testing-the-installation-using-the--coppelia-simulator)
+  - [Prerequisites](#prerequisites)
+    - [Prerequisites for Robocomp Installation](#prerequisites-for-robocomp-installation)
+    - [Prerequisites for Compiling Robocomp Components](#prerequisites-for-compiling-robocomp-components)
+  - [Installation Steps](#installation-steps)
+      - [Installing some RoboLab's components from GitHub](#installing-some-robolabs-components-from-github)
+  - [Connecting a JoyStick (if no JoyStick available skip to the next section)](#connecting-a-joystick-if-no-joystick-available-skip-to-the-next-section)
+  - [Using the keyboard as a JoyStick](#using-the-keyboard-as-a-joystick)
+- [Testing the installation using the Coppelia Simulator](#testing-the-installation-using-the-coppelia-simulator)
 - [Next steps](#next-steps)
 - [Known issues](#known-issues)
 
@@ -129,7 +130,7 @@ Done! Now let's have some fun.
 
 To test RoboComp with Coppelia you need to:
 
-- Install Coppelia Robotics and Pyrep. There are detailed instructions [here](https://github.com/robocomp/robocomp/blob/development/doc/DSR-start.md)
+- Install Coppelia Robotics and Pyrep.
 - Run the bridge, i.e. omniPyrep.py and see that Coppelia starts Ok.
 - Connect your new component to the ports offered in omniPyrep.py or
 - Connect a joystick or XBox pad to omniRep.py using [this component](https://github.com/robocomp/robocomp-robolab/tree/master/components/hardware/external_control/joystickpublish)
@@ -183,13 +184,9 @@ Follow the instructions in https://github.com/robocomp/robocomp/blob/development
 
 You can find more tutorials on RoboComp in [tutorials](doc/README.md) 
 
-Drop comments and ask questions in:
-
-- https://gitter.im/robocomp
-
 Please, report any bugs with the github issue system: [Robocomp Issues](https://github.com/robocomp/robocomp/issues)
 
-If you have any suggestions to improve the repository, like features or tutorials, please contact us on [![Join the chat at https://gitter.im/robocomp/robocomp](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/robocomp/robocomp?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) or create a feature request [here](https://github.com/robocomp/robocomp/issues).
+If you have any suggestions to improve the repository, like features or tutorials, please create a feature request [here](https://github.com/robocomp/robocomp/issues).
 
 
 # Known issues

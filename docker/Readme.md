@@ -7,7 +7,6 @@
 
 In Robocomp we have created several docker files that can be used to build different images with Ubuntu versions of Robocomp.
 In the subdirectories of this folder, you can find files to create Robocomp images with or without FCL on Ubuntu Bionic or Focal.
-> Note: you can also find a version of Robocomp with AGM [here](https://github.com/ljmanso/AGM/tree/current/docker/bionic).
 
 To create the Docker images, you can enter the corresponding subdirectory and run
 ```docker
@@ -38,8 +37,6 @@ We have also developed a tool on top of docker that you could be interested in: 
 
 ### Other Dockerfiles related with Robocomp
 These other Dockerfiles, dockercompose files, and related images in the docker hub could be of your interest if you are working with these projects.
-#### AGM
-https://github.com/ljmanso/AGM/tree/current/docker/bionic
 
 #### DSR
 https://github.com/robocomp/dsr-graph/tree/development/docker/focal

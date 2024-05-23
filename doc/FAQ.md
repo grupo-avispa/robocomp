@@ -4,15 +4,15 @@
 
 Robocomp is an Open-Source Robotics Framework, where you can simulate, model and program your own robots, in a C.O.P (Component Oriented Programming) enviroment. You can create components and share them with the community. Components communicate with each other via Ice [[1](https://doc.zeroc.com/ice/3.7/introduction)], a framework for building distributed applications. Simulation is done with RCIS, the built-in simulator.
 
-Robocomp was presented with the publication of the paper: "Robocomp: A Tool-Based Robotics Framework" [[2](https://www.researchgate.net/publication/262179907_RoboComp_A_ToolBased_Robotics_Framework_Lecture_Notes_in_Computer_Science)]. You can see more projects from Robolab, the investigation team from Universidad de Extremadura that created and currently maintains Robocomp [here](https://robolab.unex.es) (some of the information is in Spanish).
+Robocomp was presented with the publication of the paper: "Robocomp: A Tool-Based Robotics Framework". You can see more projects from Robolab, the investigation team from Universidad de Extremadura that created and currently maintains Robocomp [here](https://robolab.unex.es) (some of the information is in Spanish).
 
 ## What to do if you are new to the project and want to help?
 
 Thank you for wanting to improve the project! 
 
-So you are informed, please first read [the Contributing Guide](../CONTRIBUTING.md), and the documentation for the project. [Here](https://robocomp.github.io/web/blog) you can see the list of projects for Google Summer of Code for some ideas on what is needed. If you need additional help, drop a message on [Google Groups](https://groups.google.com/forum/?hl=es#!forum/robocomp-dev) or [Gitter](https://gitter.im/robocomp).
+So you are informed, please first read [the Contributing Guide](../CONTRIBUTING.md), and the documentation for the project. [Here](https://robocomp.github.io/web/blog) you can see the list of projects for Google Summer of Code for some ideas on what is needed. If you need additional help, drop a message on [Google Groups](https://groups.google.com/forum/?hl=es#!forum/robocomp-dev).
 
-If you make your own project with Robocomp, we would love to hear about it. Tell us on [Gitter](https://gitter.im/robocomp).
+If you make your own project with Robocomp, we would love to hear about it.
 
 ## What kind of work can you do to improve Robocomp?
 

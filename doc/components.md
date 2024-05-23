@@ -18,11 +18,11 @@ Components need a way to share information among them, and here is where communi
 
 Putting together programs and a communication middleware, you can almost come up with a way to make more components. Except, one more thing is needed, a model for your components. 
 
-You need to define what is a generic component and consequently how its internal structure is going to be, its directory and building ecosystem, how it has to be documented, its default behavior, how it will be deployed and its modes of communicating. There are several proposals that do exactly this, one of them being the famous [CORBA](http://www.corba.org).
+You need to define what is a generic component and consequently how its internal structure is going to be, its directory and building ecosystem, how it has to be documented, its default behavior, how it will be deployed and its modes of communicating. There are several proposals that do exactly this, one of them being the famous CORBA.
 
 ## Robocomp Components
 
-In RoboComp (2005- ) we have created our own component model, inspired by the [ORCA](http://orca-robotics.sourceforge.net/) model and making it evolve to fit our needs along these years. As a middleware, RoboComp primarily uses [Ice](http://www.zeroc.com) and there is ongoing experimental work to make RoboComp middleware agnostic, so its components can be re-generated to use other middlewares such as [DDS](https://www.dds-foundation.org/).
+In RoboComp (2005- ) we have created our own component model, inspired by the [ORCA](http://orca-robotics.sourceforge.net/) model and making it evolve to fit our needs along these years. As a middleware, RoboComp primarily uses [Ice](http://www.zeroc.com) and there is ongoing experimental work to make RoboComp middleware agnostic, so its components can be re-generated to use other middlewares such as DDS.
 
 RoboComp's components model is quite simple and we always try to simplify it even more. It can be best explained through two Domain Specific Languages (DSLs) that have been created to define a component at a very high level of abstraction. 
 
