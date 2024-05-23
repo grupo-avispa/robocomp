@@ -1,7 +1,7 @@
 ARG base_image="nvidia/opengl"
-ARG base_tag="base-ubuntu20.04"
+ARG base_tag="base-ubuntu22.04"
 ARG branch="development"
-ARG robocomp_version="dsr-components"
+ARG robocomp_version="dsr"
 
 FROM ${base_image}:${base_tag} AS dependencies-version
 # Disable Prompt During Packages Installation
@@ -18,14 +18,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends  \
 RUN cd ~ && export branch=$branch \
     && curl -sL https://raw.githubusercontent.com/robocomp/robocomp/$branch/tools/install/resources/robocomp_prerequisites_install.sh | bash -s $branch
 RUN export uid=1000 gid=1000 && \
-    mkdir -p /home/robolab && \
-    echo "robolab:x:${uid}:${gid}:Robolab,,,:/home/robolab:/bin/bash" >> /etc/passwd && \
-    echo "robolab:x:${uid}:" >> /etc/group && \
-    echo "robolab:robolab"|chpasswd && \
-    echo "robolab ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/robolab-user && \
-    chown ${uid}:${gid} -R /home/robolab
-USER robolab
-WORKDIR /home/robolab/
+    mkdir -p /home/demo && \
+    echo "demo:x:${uid}:${gid}:demo,,,:/home/demo:/bin/bash" >> /etc/passwd && \
+    echo "demo:x:${uid}:" >> /etc/group && \
+    echo "demo:demo"|chpasswd && \
+    echo "demo ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/demo-user && \
+    chown ${uid}:${gid} -R /home/demo
+USER demo
+WORKDIR /home/demo/
 
 
 FROM dependencies-version AS base-version
@@ -33,14 +33,15 @@ ARG branch
 # Using robocomp installation script
 RUN cd ~ && export branch=$branch \
     && curl -sL https://raw.githubusercontent.com/robocomp/robocomp/$branch/tools/install/robocomp_install.sh | bash -s $branch
-ENV PATH=$PATH:/opt/robocomp/bin/:'/home/robolab/.local/bin'
-ENV ROBOCOMP=/home/robolab/robocomp
-RUN export ROBOCOMP=/home/robolab/robocomp
-RUN export PATH=$PATH:/opt/robocomp/bin/:'/home/robolab/.local/bin'
-#RUN sudo pip3 install /home/robolab/robocomp/tools/cli/
-#RUN cd robocomp && rcconfig init && mkdir build && cd build && cmake .. && make -j$(nproc) && sudo make install
-#RUN sudo sh -c "echo '/opt/robocomp/lib/' >> /etc/ld.so.conf"
-#RUN sudo ldconfig
+ENV PATH=$PATH:/opt/robocomp/bin/:'/home/demo/.local/bin'
+ENV ROBOCOMP=/home/demo/robocomp
+RUN export ROBOCOMP=/home/demo/robocomp
+RUN export PATH=$PATH:/opt/robocomp/bin/:'/home/demo/.local/bin'
+USER demo
+RUN cd /home/demo/robocomp && mkdir -p build && cd build && cmake .. && make -j$(nproc)
+USER root
+RUN cd /home/demo/robocomp/build && make install
+USER demo
 WORKDIR robocomp
 RUN git annex get \
   files/innermodel/simpleworld.xml \
@@ -48,65 +49,28 @@ RUN git annex get \
   files/innermodel/tar36h11-*.png \
   files/osgModels/textures/Metal.jpg \
   files/osgModels/robex/robex.ive
-RUN cp -r -L files /home/robolab/files 2>/dev/null || :
+RUN cp -r -L files /home/demo/files 2>/dev/null || :
 
-
-FROM base-version AS fcl-version
-USER root
-RUN apt update && apt-get install --no-install-recommends --yes \
-  libfcl-dev
-USER robolab
-RUN cd /home/robolab/robocomp && mkdir -p build && cd build && cmake -DFCL_SUPPORT=True .. && make -j$(nproc)
-USER root
-RUN cd /home/robolab/robocomp/build && make install
-USER robolab
-
-
-FROM fcl-version AS dsr-version
+FROM base-version AS dsr-version
 USER root
 RUN apt-get update && apt-get install -y --no-install-recommends \
-  g++-10 \
-  gcc-10 \
+  libasio-dev \
+  libtinyxml2-dev \
+  libopencv-dev \
+  libqglviewer-dev-qt5 \
   libeigen3-dev \
   python3-dev \
   python3-pybind11 \
-  libqglviewer-dev-qt5 \
-  libasio-dev \
-  libtinyxml2-dev  \
-  libqt5svg5-dev \
   && rm -rf /var/lib/apt/lists/*
-RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 1
-RUN update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-10 1
-RUN python3 -m pip install pyrep
 
 # ICE fix
 COPY Connection.h /usr/include/Ice/Connection.h
 
 ### Third party dependencies
-RUN (curl -O https://raw.githubusercontent.com/robocomp/robocomp/development/classes/threadpool/threadpool.h && mkdir -p /usr/include/threadpool && mv threadpool.h /usr/include/threadpool )
-RUN curl -S https://raw.githubusercontent.com/robocomp/cortex/development/installation.sh | bash -x
+RUN curl -S https://raw.githubusercontent.com/grupo-avispa/cortex/development/installation.sh | bash -x
 RUN rm -r /usr/local/include/cppitertools
 RUN git clone https://github.com/ryanhaining/cppitertools /usr/local/include/cppitertools
-USER robolab
-
-
-FROM dsr-version AS dsr-components-version
-USER root
-RUN apt-get update && apt-get install -y --no-install-recommends \
-  libopencv-dev \
-  python3-zeroc-ice  \
-  psmisc \
-  && rm -rf /var/lib/apt/lists/*
-#Compilation of DSR components
-USER robolab
-WORKDIR /home/robolab/robocomp/components/
-RUN git clone --progress https://github.com/robocomp/dsr-graph.git
-WORKDIR /home/robolab/robocomp/components/dsr-graph/components/
-RUN cd idserver && cmake . && make -j10
-RUN cd pioneer_dsr && cmake . && make -j10
-RUN cd path_follower && cmake . && make -j10
-RUN cd path_planner_astar && cmake . && make -j10
-RUN cd elastic_band && cmake . && make -j10
+USER demo
 
 
 FROM ${robocomp_version}-version AS final

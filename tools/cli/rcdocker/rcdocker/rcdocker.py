@@ -23,7 +23,7 @@ DEBUG = True
 
 CURRENT_FILE_PATH = os.path.dirname(os.path.abspath(__file__))
 INSTALLATION_PATH = "/opt/robocomp/share/rcbuildvalidator/"
-ROBOCOMP_SRC_PATH = "/home/robolab/robocomp/"
+ROBOCOMP_SRC_PATH = "/home/demo/robocomp/"
 
 DEBUG = False
 pkg_name = "docker-ce"
@@ -59,7 +59,7 @@ def stop_and_remove_container(container_name):
 
 @app.command(name="check-robocomp-install")
 def robocomp_installation_check(
-        ubuntu_version: str = typer.Argument("20.04"),
+        ubuntu_version: str = typer.Argument("22.04"),
         branch: str = typer.Argument("development"),
         install_script: Path = typer.Option(None),
         force_build: bool = typer.Option(False)
@@ -75,7 +75,7 @@ def robocomp_installation_check(
 
 @app.command(name="interactive")
 def start_interactive_docker_container(
-        ubuntu_version: str = typer.Argument("20.04"),
+        ubuntu_version: str = typer.Argument("22.04"),
         force_build: bool = typer.Option(False, "--force-build", "-f"),
         mount_paths=None
 ):
@@ -87,25 +87,25 @@ def start_interactive_docker_container(
     for mount_path in mount_paths:
         if mount_path:
             mount_path = mount_path.rstrip(os.path.sep)
-            mount_options.append(f"-v {os.path.expanduser(mount_path)}:/home/robolab/{mount_path.split('/')[-1]}")
+            mount_options.append(f"-v {os.path.expanduser(mount_path)}:/home/demo/{mount_path.split('/')[-1]}")
     mount_options = " ".join(mount_options)
     stop_and_remove_container("robocomp_test")
     cprint(f"Starting {image_name_and_tag} container.", 'green')
-    cprint(f"You can find the robocomp installation script in /home/robolab/robocomp_install.sh", 'green')
+    cprint(f"You can find the robocomp installation script in /home/demo/robocomp_install.sh", 'green')
     cprint(f"To end this session execute <exit> or use <Ctrl>+d in the current bash terminal.", 'green')
-    command = f"docker run --name robocomp_test -it -w /home/robolab/  \
-    --user=robolab:robolab \
+    command = f"docker run --name robocomp_test -it -w /home/demo/  \
+    --user=demo:demo \
     --env='DISPLAY' \
     --volume='/etc/group:/etc/group:ro' \
     --volume='/etc/passwd:/etc/passwd:ro' \
     --volume='/etc/shadow:/etc/shadow:ro' \
     --volume='/etc/sudoers.d:/etc/sudoers.d:ro' \
     --volume='/tmp/.X11-unix:/tmp/.X11-unix:rw' \
-    --volume='{INSTALLATION_PATH}/resources/robocomp_install.sh:/home/robolab/robocomp_install.sh' \
+    --volume='{INSTALLATION_PATH}/resources/robocomp_install.sh:/home/demo/robocomp_install.sh' \
     {image_name_and_tag} bash"
     return cli.execute_command(command)
 
-def build_robocomp_dependencies_image(version: str = typer.Argument("20.04")):
+def build_robocomp_dependencies_image(version: str = typer.Argument("22.04")):
     return build_image(base_name="ubuntu",
                        base_tag=version,
                        branch="tools_refactoring",
@@ -122,7 +122,7 @@ def string_to_docker_image(input_str: str ):
 @app.command("build")
 def build_image(
         base_name="ubuntu",
-        base_tag="20.04",
+        base_tag="22.04",
         image_tag=None,
         branch="tools_refactoring",
         robocomp_version="dsr-components",
@@ -158,7 +158,7 @@ def check_robocomp_dependencies_image_exists(version):
     check_robocomp_image_exists(f"robocomp/dependencies")
 
 
-def check_robocomp_image_exists(image_name, tag=None, version="20.04"):
+def check_robocomp_image_exists(image_name, tag=None, version="22.04"):
     if tag is None:
         tag = f"robocomp-ubuntu{version}"
     images = docker_client.images.list(image_name)
@@ -205,8 +205,8 @@ def run_on_image(image_str, command, volumes_=None, force_build=False):
         image_name_and_tag,
         command,
         name="robocomp_test",
-        working_dir="/home/robolab/",
-        user="robolab:robolab",
+        working_dir="/home/demo/",
+        user="demo:demo",
         environment=["DISPLAY"],
         volumes=volumes,
         detach=True,
@@ -224,7 +224,7 @@ def run_on_image(image_str, command, volumes_=None, force_build=False):
     return container
 
 @app.command("build-comp")
-def build_component_in_container(component_name, component_path=None, robocomp_version="robocomp/dsr:ubuntu-20.04"):
+def build_component_in_container(component_name, component_path=None, robocomp_version="robocomp/dsr:ubuntu-22.04"):
     if component_path is None:
         if component_name:
             if component_path := Workspace().find_component_path(component_name, is_interactive()):
@@ -234,7 +234,7 @@ def build_component_in_container(component_name, component_path=None, robocomp_v
                 except ValueError:
                     pass
                 volumes = {
-                    component_path: {'bind': str(Path("/home/robolab/") / path_in_container), 'mode': 'rw'},
+                    component_path: {'bind': str(Path("/home/demo/") / path_in_container), 'mode': 'rw'},
                 }
                 command = f"sh -x -c \"cd {path_in_container} && mkdir -p build && cd build && cmake .. && make\""
                 run_on_image(robocomp_version, command, volumes)
@@ -269,8 +269,8 @@ def build_component_in_container(component_name, component_path=None, robocomp_v
 #                     f"{image_name}:{tag}",
 #                     f"robocomp",
 #                     name="robocomp_robocomp",
-#                     working_dir="/home/robolab/",
-#                     user="robolab:robolab",
+#                     working_dir="/home/demo/",
+#                     user="demo:demo",
 #                     environment=["DISPLAY"],
 #                     volumes=volumes,
 #                     detach=True,
