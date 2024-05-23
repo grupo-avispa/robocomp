@@ -16,7 +16,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends  \
       sudo \
     && rm -rf /var/lib/apt/lists/*
 RUN cd ~ && export branch=$branch \
-    && curl -sL https://raw.githubusercontent.com/robocomp/robocomp/$branch/tools/install/resources/robocomp_prerequisites_install.sh | bash -s $branch
+    && curl -sL https://raw.githubusercontent.com/grupo-avispa/robocomp/$branch/tools/install/resources/robocomp_prerequisites_install.sh | bash -s $branch
 RUN export uid=1000 gid=1000 && \
     mkdir -p /home/demo && \
     echo "demo:x:${uid}:${gid}:demo,,,:/home/demo:/bin/bash" >> /etc/passwd && \
@@ -32,7 +32,7 @@ FROM dependencies-version AS base-version
 ARG branch
 # Using robocomp installation script
 RUN cd ~ && export branch=$branch \
-    && curl -sL https://raw.githubusercontent.com/robocomp/robocomp/$branch/tools/install/robocomp_install.sh | bash -s $branch
+    && curl -sL https://raw.githubusercontent.com/grupo-avispa/robocomp/$branch/tools/install/robocomp_install.sh | bash -s $branch
 ENV PATH=$PATH:/opt/robocomp/bin/:'/home/demo/.local/bin'
 ENV ROBOCOMP=/home/demo/robocomp
 RUN export ROBOCOMP=/home/demo/robocomp

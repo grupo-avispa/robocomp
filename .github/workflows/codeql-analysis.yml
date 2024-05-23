@@ -72,7 +72,7 @@ jobs:
       run: cmake -E make_directory ${{github.workspace}}/build
 
     - name: Robocomp dependencies install
-      run: curl -sL https://raw.githubusercontent.com/robocomp/robocomp/${{ steps.branch-name.outputs.current_branch }}/tools/install/resources/robocomp_prerequisites_install.sh | bash
+      run: curl -sL https://raw.githubusercontent.com/grupo-avispa/robocomp/${{ steps.branch-name.outputs.current_branch }}/tools/install/resources/robocomp_prerequisites_install.sh | bash
 
     - name: Robocomp tools install
       shell: bash

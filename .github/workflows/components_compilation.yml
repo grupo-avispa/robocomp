@@ -15,11 +15,11 @@ jobs:
   make-compilation-test:
     runs-on: ubuntu-latest
     container:
-      image: "robocomp/robocomp:development__dsr__latest"
-      options: --user robolab
+      image: "grupo-avispa/robocomp:development__dsr__latest"
+      options: --user demo
 
     steps:
-      - run: "cd /home/robolab/robocomp/tools/cli/robocompdsl/test/autogeneration_tests/test_cdsl/ && python3 test_component_generation.py --no-execution --avoid agmTestCp"
+      - run: "cd /home/demo/robocomp/tools/cli/robocompdsl/test/autogeneration_tests/test_cdsl/ && python3 test_component_generation.py --no-execution --avoid agmTestCp"
   fail-on-image-fail:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'failure' }}

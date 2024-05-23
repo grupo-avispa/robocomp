@@ -16,12 +16,12 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: "robocomp/robocomp:development__dsr__latest"
-      options: --user robolab
+      options: --user demo
 
     steps:
       - name: Robocomp tools install
         shell: bash
-        working-directory: /home/robolab/robocomp/tools/cli/
+        working-directory: /home/demo/robocomp/tools/cli/
         run: sudo pip3 install .
       - run: "robocomp --help"
       - run: "rcworkspace --help"
@@ -32,7 +32,7 @@ jobs:
       - run: "robocompdsl --help"
       - name: Yaku install
         shell: bash
-        working-directory: /home/robolab/robocomp/tools/yaku/
+        working-directory: /home/demo/robocomp/tools/yaku/
         run: sudo pip3 install .
       - run: "yaku --help"
   fail-on-image-fail:
