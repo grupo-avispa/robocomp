@@ -8,6 +8,7 @@ sudo ln -s ~ /home/robocomp
 echo "export ROBOCOMP=~/robocomp" >> ~/.bashrc
 echo "export PATH=$PATH:/opt/robocomp/bin" >> ~/.bashrc
 echo "export PYTHONIOENCODING=utf-8" >> ~/.bashrc
+echo "export LD_LIBRARY_PATH=/opt/robocomp/lib:$LD_LIBRARY_PATH" >> ~/.bashrc
 export ROBOCOMP=~/robocomp
 export PATH=$PATH:/opt/robocomp/bin
 export PYTHONIOENCODING=utf-8
