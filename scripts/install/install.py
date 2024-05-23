@@ -21,13 +21,13 @@ command.extend(modules)
 call(command)
 
 call(["cd"])
-call(["git","clone","https://github.com/robocomp/robocomp.git"])
+call(["git","clone","https://github.com/grupo-avispa/robocomp.git"])
 
 call(["sudo","ln","-s","/opt/robocomp/-1.0","/opt/robocomp"])
 call(["sudo","ln","-s","/home/username","/home/robocomp"])
 
-call(["echo","export ROBOCOMP=/home/username/robocomp",">>","/home/usermane/.bashrc"])
-call(["echo","export PATH=$PATH:/opt/robocomp/bin",">>","/home/usermane/.bashrc"])
+call(["echo","export ROBOCOMP=/home/username/robocomp",">>","/home/username/.bashrc"])
+call(["echo","export PATH=$PATH:/opt/robocomp/bin",">>","/home/username/.bashrc"])
 call(["source",".bashrc"])
 
 call(["cd","robocomp"])
