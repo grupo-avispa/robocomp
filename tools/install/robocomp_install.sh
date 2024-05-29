@@ -3,13 +3,14 @@ branch="${branch:-development}"
 source <(curl -sL https://raw.githubusercontent.com/grupo-avispa/robocomp/$branch/tools/install/resources/robocomp_prerequisites_install.sh)
 
 git clone -b $branch https://github.com/grupo-avispa/robocomp.git
-sudo ln -s ~ /home/robocomp
-echo "export ROBOCOMP=~/robocomp" >> ~/.bashrc
-echo "export PATH=$PATH:/opt/robocomp/bin" >> ~/.bashrc
-echo "export PYTHONIOENCODING=utf-8" >> ~/.bashrc
-export ROBOCOMP=~/robocomp
+echo "export ROBOCOMP=$HOME/robocomp" >> $HOME/.bashrc
+echo "export PATH=/opt/robocomp/bin:$PATH" >> $HOME/.bashrc
+echo "export PYTHONIOENCODING=utf-8" >> $HOME/.bashrc
+echo "export LD_LIBRARY_PATH=/opt/robocomp/lib:$LD_LIBRARY_PATH" >> $HOME/.bashrc
+export ROBOCOMP=$HOME/robocomp
 export PATH=$PATH:/opt/robocomp/bin
 export PYTHONIOENCODING=utf-8
+sudo ln -s ${HOME} /home/robocomp
 sudo [ -d /opt/robocomp ] && sudo rm -r /opt/robocomp
 cd robocomp
 sudo pip3 install tools/cli/

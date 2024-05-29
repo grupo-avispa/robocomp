@@ -6,6 +6,8 @@ ARG robocomp_version="dsr"
 FROM ${base_image}:${base_tag} AS dependencies-version
 # Disable Prompt During Packages Installation
 ARG DEBIAN_FRONTEND=noninteractive
+ENV TZ=Europe/Madrid
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 ARG branch
 # DEFAULT LD_LIBRARY_PATH vaiables from the nvidia/opengl image confuses pyside2 about the qt5 Library paths
 ENV LD_LIBRARY_PATH="/lib:/usr/lib"
@@ -68,8 +70,6 @@ COPY Connection.h /usr/include/Ice/Connection.h
 
 ### Third party dependencies
 RUN curl -S https://raw.githubusercontent.com/grupo-avispa/cortex/development/installation.sh | bash -x
-RUN rm -r /usr/local/include/cppitertools
-RUN git clone https://github.com/ryanhaining/cppitertools /usr/local/include/cppitertools
 USER demo
 
 
