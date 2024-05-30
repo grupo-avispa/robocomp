@@ -15,7 +15,7 @@ jobs:
   make-compilation-test:
     runs-on: ubuntu-latest
     container:
-      image: "grupo-avispa/robocomp:development__dsr__latest"
+      image: "grupoavispa/robocomp:development__dsr__latest"
       options: --user demo
 
     steps:
